@@ -1,4 +1,4 @@
-# Zero downtime ElasticSearch reindexing using Laravel
+# Laravel and ElasticSearch
 
 ## Setup
 
@@ -14,11 +14,12 @@ https://dev.mysql.com/doc/world-setup/en/world-setup-installation.html
 php artisan elastic:create-index
 ```
 
-The above command will create an index like `world_1544094130` with a timestamp appended. After that, it will create two aliases world_write and world_read. Both aliases will point at the index `world_1544094130`.
+The above command will create `world` index.
 
-## Zero downtime reindexing
+## Push all data to ElasticSearch index
 
 ```
-php artisan elastic:reindex
+php artisan elastic:push-to-cluster
 ```
 
+The above command will push all data to `world` index.
