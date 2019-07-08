@@ -3,9 +3,9 @@
 namespace App\Console;
 
 use App\Console\Commands\CreateIndexCommand;
-use App\Console\Commands\ReindexCommand;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use App\Console\Commands\PushToClusterCommand;
 
 class Kernel extends ConsoleKernel
 {
@@ -16,7 +16,7 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         CreateIndexCommand::class,
-        ReindexCommand::class,
+        PushToClusterCommand::class
     ];
 
     /**

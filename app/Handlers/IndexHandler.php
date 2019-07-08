@@ -11,22 +11,12 @@ class IndexHandler
     /**
      * Search index name
      */
-    const INDEX_PREFIX = 'world';
+    const INDEX_NAME = 'world';
 
     /**
      * Search type
      */
     const TYPE = '_doc';
-
-    /**
-     * Write alias
-     */
-    const WRITE_ALIAS = 'world_write';
-
-    /**
-     * Read alias
-     */
-    const READ_ALIAS = 'world_read';
 
     /**
      * ElasticSearch client
@@ -49,147 +39,24 @@ class IndexHandler
     /**
      * Create new index
      *
-     * @param string $index
      * @return void
      */
-    public function createIndex($index)
+    public function createIndex()
     {
         try {
-            $isIndexExist = $this->client->indices()->exists(['index' => $index]);
+            $isIndexExist = $this->client->indices()->exists(['index' => self::INDEX_NAME]);
 
             if (!$isIndexExist) {
-                $this->client->indices()->create($this->params($index));
+                $this->client->indices()->create($this->params(self::INDEX_NAME));
             }
         } catch (Exception $e) {
             Log::error('Unable to create index', [
                 'message' => $e->getMessage(),
-                'index' => $index,
+                'index' => self::INDEX_NAME,
             ]);
 
             throw $e;
         }
-    }
-
-    /**
-     * Add write alias to index
-     *
-     * @param string $index
-     * @return void
-     */
-    public function addWriteAlias($index)
-    {
-        $this->addAlias($index, self::WRITE_ALIAS);
-    }
-
-    /**
-     * Add read alias to index
-     *
-     * @param string $index
-     * @return void
-     */
-    public function addReadAlias($index)
-    {
-        $this->addAlias($index, self::READ_ALIAS);
-    }
-
-    /**
-     * Add an alias to index
-     *
-     * @param string $index
-     * @param string $alias
-     * @return void
-     */
-    public function addAlias($index, $alias)
-    {
-        try {
-            $this->client->indices()->putAlias([
-                'index' => $index,
-                'name' => $alias,
-            ]);
-        } catch (Exception $e) {
-            Log::error('Unable to add index alias', [
-                'message' => $e->getMessage(),
-                'index' => $index,
-                'alias' => $alias,
-            ]);
-
-            throw $e;
-        }
-    }
-
-    /**
-     * Switch index alias
-     *
-     * @param string $fromIndex
-     * @param string $toIndex
-     * @param string $alias
-     * @return void
-     */
-    public function switchAlias($fromIndex, $toIndex, $alias)
-    {
-        $params['body'] = [
-            'actions' => [
-                [
-                    'remove' => [
-                        'index' => $fromIndex,
-                        'alias' => $alias,
-                    ],
-                ],
-                [
-                    'add' => [
-                        'index' => $toIndex,
-                        'alias' => $alias,
-                    ],
-                ],
-            ],
-        ];
-
-        try {
-            $this->client->indices()->updateAliases($params);
-        } catch (Exception $e) {
-            Log::error('Index alias switching failed', [
-                'message' => $e->getMessage(),
-                'fromIndex' => $fromIndex,
-                'toIndex' => $toIndex,
-                'alias' => $alias,
-            ]);
-
-            throw $e;
-        }
-    }
-
-    /**
-     * Get index by alias
-     *
-     * @return string
-     */
-    public function getIndexByAlias($alias)
-    {
-        try {
-            $indices = $this->client->indices()->getAlias(['name' => $alias]);
-
-            list($index) = array_keys($indices);
-
-        } catch (Exception $e) {
-            Log::error('Unable to get index by alias', [
-                'message' => $e->getMessage(),
-                'alias' => $alias,
-            ]);
-
-            throw $e;
-        }
-
-        return $index;
-    }
-
-    /**
-     * Generate index name
-     *
-     * @return string
-     */
-    public function generateIndexName()
-    {
-        return self::INDEX_PREFIX . '_' . time();
     }
 
     /**
@@ -199,11 +66,11 @@ class IndexHandler
      * @param array $data
      * @return void
      */
-    public function indexDataUsingAlias($id, array $data)
+    public function indexData($id, array $data)
     {
         try {
             $this->client->index([
-                'index' => self::WRITE_ALIAS,
+                'index' => self::INDEX_NAME,
                 'type' => self::TYPE,
                 'id' => $id,
                 'body' => $data,
@@ -217,7 +84,7 @@ class IndexHandler
         }
     }
 
-    /**
+    /*
      * Remove search index
      *
      * @param string $index
@@ -231,13 +98,12 @@ class IndexHandler
     /**
      * Index params
      *
-     * @param string $index
      * @return array
      */
-    protected function params($index)
+    protected function params()
     {
         return [
-            'index' => $index,
+            'index' => self::INDEX_NAME,
             'body' => [
                 'mappings' => [
                     self::TYPE => [
