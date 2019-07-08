@@ -8,6 +8,10 @@ Install ElasticSearch 6.7 or higher. The code should work with latest version of
 ### Database migration
 Please create the `world` database and populate data from the following url.
 
+https://downloads.mysql.com/docs/world.sql.zip
+
+Detail guide:
+
 https://dev.mysql.com/doc/world-setup/en/world-setup-installation.html
 
 
