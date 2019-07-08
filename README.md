@@ -3,7 +3,7 @@
 ## Setup
 
 ### ElasticSearch
-Install ElasticSearch 6.7 or higher. However, the code only tested with ElasticSearch 6.7
+Install ElasticSearch 6.7 or higher. The code should work with latest version of ElasticSearch. However, the code only tested with ElasticSearch 6.7
 
 ### Database migration
 Please create the `world` database and populate data from the following url.
