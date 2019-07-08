@@ -43,6 +43,6 @@ class PushToSearchClusterJob implements ShouldQueue
      */
     public function handle(IndexHandler $indexHandler)
     {
-        $indexHandler->indexDataUsingAlias($this->id, $this->data);
+        $indexHandler->indexData($this->id, $this->data);
     }
 }

@@ -48,6 +48,12 @@ class PushToClusterCommand extends Command
      */
     public function handle()
     {
-        $this->indexHandler->createIndex();
+        Country::with('cities', 'languages')
+            ->orderBy('Code')
+            ->chunk(100, function ($countries) {
+                foreach ($countries as $country) {
+                    dispatch(new PushToSearchClusterJob($country->Code, $country->toArray()));
+                }
+            });
     }
 }
