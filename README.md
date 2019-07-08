@@ -2,6 +2,9 @@
 
 ## Setup
 
+### ElasticSearch
+Install ElasticSearch 6.7 or higher. However, the code only tested with ElasticSearch 6.7
+
 ### Database migration
 Please create the `world` database and populate data from the following url.
 
@@ -23,3 +26,8 @@ php artisan elastic:push-to-cluster
 ```
 
 The above command will push all data to `world` index.
+
+## Unit testing
+```
+vendor/bin/phpunit
+```
