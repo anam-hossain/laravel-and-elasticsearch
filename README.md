@@ -29,7 +29,7 @@ The above command will create `world` index.
 php artisan elastic:push-to-cluster
 ```
 
-The above command will push all data to `world` index.
+The above command will push all data from database to `world` index.
 
 ## Unit testing
 ```
