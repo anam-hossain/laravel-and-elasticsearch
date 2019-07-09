@@ -5,6 +5,13 @@
 ### ElasticSearch
 Install ElasticSearch 6.7 or higher. The code should work with latest version of ElasticSearch. However, the code only tested with ElasticSearch 6.7
 
+Add the following to `.env` file:
+
+```
+ELASTIC_HOST=127.0.0.1
+ELASTIC_PORT=9200
+```
+
 ### Database migration
 Please create the `world` database and populate data from the following url.
 
