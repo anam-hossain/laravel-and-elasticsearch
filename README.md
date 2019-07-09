@@ -38,6 +38,14 @@ php artisan elastic:push-to-cluster
 
 The above command will push all data from database to `world` index.
 
+## Searching documents
+
+Visit:
+
+```
+/search?country=Australia&city=Sydney
+```
+
 ## Unit testing
 ```
 vendor/bin/phpunit
