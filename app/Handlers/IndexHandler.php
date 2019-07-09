@@ -105,6 +105,19 @@ class IndexHandler
         return [
             'index' => self::INDEX_NAME,
             'body' => [
+                'settings' => [
+                    'number_of_shards' => 2,
+                    'analysis' => [
+                        'normalizer' => [
+                            'normalizer_case_insensitive' => [
+                                'type' => 'custom',
+                                'filter' => [
+                                    'lowercase',
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
                 'mappings' => [
                     self::TYPE => [
                         '_source' => [
@@ -113,9 +126,11 @@ class IndexHandler
                         'properties' => [
                             'Name' => [
                                 'type' => 'keyword',
+                                'normalizer' => 'normalizer_case_insensitive',
                             ],
                             'LocalName' => [
                                 'type' => 'keyword',
+                                'normalizer' => 'normalizer_case_insensitive',
                             ],
                         ],
                     ],

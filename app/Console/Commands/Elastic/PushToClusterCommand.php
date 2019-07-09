@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Console\Commands;
+namespace App\Console\Commands\Elastic;
 
 use App\Country;
 use App\Handlers\IndexHandler;
