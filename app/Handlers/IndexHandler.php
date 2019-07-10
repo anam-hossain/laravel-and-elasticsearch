@@ -11,7 +11,7 @@ class IndexHandler
     /**
      * Search index name
      */
-    const INDEX_NAME = 'world';
+    const INDEX_NAME = 'countries';
 
     /**
      * Search type

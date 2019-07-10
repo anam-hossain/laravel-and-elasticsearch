@@ -128,7 +128,7 @@ abstract class TestCase extends BaseTestCase
                 "max_score": 4.3652196,
                 "hits": [
                 {
-                    "_index": "world",
+                    "_index": "countries",
                     "_type": "_doc",
                     "_id": "AUS",
                     "_score": 4.3652196,

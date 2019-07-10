@@ -28,7 +28,7 @@ https://dev.mysql.com/doc/world-setup/en/world-setup-installation.html
 php artisan elastic:create-index
 ```
 
-The above command will create `world` index.
+The above command will create `countries` index.
 
 ## Push all data to ElasticSearch index
 
@@ -36,7 +36,7 @@ The above command will create `world` index.
 php artisan elastic:push-to-cluster
 ```
 
-The above command will push all data from database to `world` index.
+The above command will push all data from database to `countries` index.
 
 ## Searching documents
 
@@ -54,22 +54,22 @@ GET /_cat/indices?v&h=index,docs.count
 
 #### Get mappings
 ```
-GET /world/_doc/_mapping
+GET /countries/_doc/_mapping
 ```
 
 #### Search all
 ```
-GET /world/_doc/_search
+GET /countries/_doc/_search
 ```
 #### Bool Queries
 ##### Bool "AND"
 SQL representation
 ```sql
-Select * from world where Name = 'Australia'
+Select * from countries where Name = 'Australia'
 ```
 ElasticSearch query:
 ```json
-GET /world/_doc/_search
+GET /countries/_doc/_search
 {
   "query": {
     "bool": {
@@ -87,13 +87,13 @@ GET /world/_doc/_search
 ##### Bool "OR"
 SQL representation
 ```sql
-Select * from world where Name = 'Australia' OR Name = 'New Zealand'
+Select * from countries where Name = 'Australia' OR Name = 'New Zealand'
 ```
 
 ElasticSearch Query
 
 ```json
-GET /world/_doc/_search
+GET /countries/_doc/_search
 {
   "query": {
     "bool": {
@@ -116,12 +116,12 @@ GET /world/_doc/_search
 ##### Bool "NOT"
 SQL representation
 ```sql
-Select * from world where Name != 'Australia'
+Select * from countries where Name != 'Australia'
 ```
 ElasticSearch Query:
 
 ```json
-GET /world/_doc/_search
+GET /countries/_doc/_search
 {
   "query": {
     "bool": {
@@ -139,17 +139,17 @@ GET /world/_doc/_search
 #### Get an item by ID
 
 ```
-GET /world/_doc/ALB
+GET /countries/_doc/ALB
 ```
 
 #### Delete Index
 ```
-DELETE /world
+DELETE /countries
 ```
 ## Run query via cURL
 
 ```
-curl -XGET -H 'Content-Type: application/json' 'localhost:9200/world/_doc/_search?pretty' -d '
+curl -XGET -H 'Content-Type: application/json' 'localhost:9200/countries/_doc/_search?pretty' -d '
 {
   "query": {
     "bool": {
