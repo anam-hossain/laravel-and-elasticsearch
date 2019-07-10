@@ -48,14 +48,19 @@ Visit:
 
 ## Run queries in Kibana
 #### List indices
-GET /_cat/indices?v&h=index,docs.count
+```
+GET /_cat/indices?v&h```=index,docs.count
+```
 
 #### Get mappings
+```
 GET /world/_doc/_mapping
+```
 
 #### Search all
+```
 GET /world/_doc/_search
-
+```
 #### Bool Queries
 ##### Bool "AND"
 SQL representation
@@ -133,12 +138,14 @@ GET /world/_doc/_search
 
 #### Get an item by ID
 
+```
 GET /world/_doc/ALB
+```
 
 #### Delete Index
-
+```
 DELETE /world
-
+```
 ## Run query via cURL
 
 ```
