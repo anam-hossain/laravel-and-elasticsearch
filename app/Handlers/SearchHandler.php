@@ -21,7 +21,7 @@ class SearchHandler
      */
     protected $mapFields = [
         'country' => 'Name',
-        'Continent' => 'Continent',
+        'continent' => 'Continent',
         'city' => 'cities.Name',
         'language' => 'languages.Language',
     ];
