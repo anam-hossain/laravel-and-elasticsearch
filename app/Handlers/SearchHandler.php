@@ -15,7 +15,7 @@ class SearchHandler
     protected $perPage = 10;
 
     /**
-     * Request fields to search cluster fields mapping
+     * Request fields to Elastic cluster fields mapping
      *
      * @var array
      */
@@ -65,12 +65,12 @@ class SearchHandler
     /**
      * Search items
      *
-     * @return PaginatorHandler
+     * @return array
      */
     public function search()
     {
         $this->buildSearchConditions();
-   
+
         return $this->lookup();
     }
 
@@ -90,8 +90,8 @@ class SearchHandler
 
             if (count($values) > 1) {
                 // Assume query is country=Australia;England
-                // Bool representation: country=Autralia OR country=England
-                // OR is equivalent to 'should' in Elasticsearch
+                // Bool representation will be: country=Autralia OR country=England
+                // Here, 'OR' is equivalent to 'should' in Elasticsearch
                 $this->searchConditions[] = $this->buildShouldClause($matches);
             } else {
                 $this->searchConditions[] = $this->buildMustClause($matches);
