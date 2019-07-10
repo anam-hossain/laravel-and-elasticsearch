@@ -49,7 +49,7 @@ Visit:
 ## Run queries in Kibana
 #### List indices
 ```
-GET /_cat/indices?v&h```=index,docs.count
+GET /_cat/indices?v&h=index,docs.count
 ```
 
 #### Get mappings
