@@ -53,6 +53,8 @@ GET /_cat/indices?v&h=index,docs.count
 ```
 
 #### Get mappings
+The mappings is somewhat similar to database schema.
+
 ```
 GET /countries/_doc/_mapping
 ```
